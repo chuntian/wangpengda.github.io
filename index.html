@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -187,42 +187,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
-            
-            Schedule
           </a>
         </li>
       
@@ -318,17 +288,6 @@
 
           
           
-             <span id="/2018/12/20/趣学算法-1-从Fibonacci说起/" class="leancloud_visitors" data-flag-title=" 趣学算法(1)--从Fibonacci说起">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
 
           
 
@@ -351,15 +310,56 @@
       
         
           
-          &#8195;&#8195;由于最近工作中，也可以说是个人爱好吧，涉及到一些算法的问题，个人归结起来觉得应该是NP-Hard问题，一时找不到好的解决方案。于是网上各种搜索，偶然翻到一本《趣学算法》的书，大致看了两眼，发现曾经学过的一些算法 像回溯、贪心等算法，由于长时间不用，也都忘记了。于是决定在工
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/20/趣学算法-1-从Fibonacci说起/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>&#8195;&#8195;由于最近工作中，也可以说是个人爱好吧，涉及到一些算法的问题，个人归结起来觉得应该是NP-Hard问题，一时找不到好的解决方案。于是网上各种搜索，偶然翻到一本《趣学算法》的书，大致看了两眼，发现曾经学过的一些算法 像回溯、贪心等算法，由于长时间不用，也都忘记了。于是决定在工作之余，同时借助这本书的机会，再系统学习下算法，争取在学习过程中，能找到我那NP-Hard问题的解决方案。</p>
+<p>&#8195;&#8195;抛砖引玉，先从一个程序员都非常熟悉的斐波那契数列算法说起，感受一下算法的趣味。说起斐波那契，程序员们应该都非常熟悉了，估计是曾经我们学习递归时候的重点案例吧，但是除了递归还有没有别的方法呢？或者说我们有没有考虑过，结果是算对了，但是背后的效率怎么样呢？</p>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>&#8195;&#8195;先从熟悉的递归方法说起：</p>
+<p>&#8195;&#8195;斐波那契数列应该都知道，据说大自然很多现象也都是斐波那契数，有兴趣的可以去查查，这里就不多介绍了，概念说一下，用函数公式的方式表示，大概是这个意思：</p>
+<script type="math/tex; mode=display">F_n=\begin{cases} 
+        1, & n = 1\ or\ n = 2\\ 
+        F_{n-1}+F_{n-2}, & n>2
+    \end{cases}</script><p>递归算法代码最容易理解，就是反复迭代调用自己往下计算，代码基本和上述表达式一样，如下（本文章代码均用java编写，样例代码地址<a href="https://github.com/wangpengda/algorithm" target="_blank" rel="noopener">https://github.com/wangpengda/algorithm</a>):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fib</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line"> 		 SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"YYYY/MM/dd HH:mm:ss.SSS"</span>);</span><br><span class="line">		 System.out.println(sdf.format(<span class="keyword">new</span> Date()));</span><br><span class="line">		 System.out.println(Fib1(<span class="number">40</span>));</span><br><span class="line">		 System.out.println(sdf.format(<span class="keyword">new</span> Date()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Fib1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> Fib1(n - <span class="number">1</span>) + Fib1(n - <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#8195;&#8195;这个很容易理解，但是不知道有没有人用这个算过F(50),我这8G内存，4核电脑是算了半天没算出来。再专业一点就是看一下它的时间复杂度，仔细分析会发现是指数增长的，往后算，每多算一个数，时间是翻倍的，它的时间复杂度是O(2^n);</p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>&#8195;&#8195;其实斐波那契归根结底还是个数列问题，就和我们高中学的等差数列、等比数列差不多，只是它是和用当前项的前两项表示的，我们只需要记录下前两项就可以了，而不用像递归算法那样，每次都去计算前两项，具体代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fib</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"YYYY/MM/dd HH:mm:ss.SSS"</span>);</span><br><span class="line"></span><br><span class="line">		System.out.println(sdf.format(<span class="keyword">new</span> Date()));</span><br><span class="line">		System.out.println(Fib2(<span class="number">48</span>));</span><br><span class="line">		System.out.println(sdf.format(<span class="keyword">new</span> Date()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Fib2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> numsecond = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">int</span> numfirst = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">				temp = numsecond + numfirst;</span><br><span class="line">				numfirst = numsecond;</span><br><span class="line">				numsecond = temp;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> numsecond;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#8195;&#8195;这个算法的时间复杂度是O(n),用这个算F(10000)基本也在1秒之内，就是这么神奇啊。按理说这个写法速度上已经是质的飞跃了，但是…</p>
+<h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4><p>&#8195;&#8195;书上简单提了一句，还可以把时间复杂度降到O(logn),不过没有详细赘述。好事者如我，本着不打破砂锅的程序员不是好厨师的原则，继续搜索。不得不说，确实有大师，用矩阵的方法，也是让我开了眼界啊，具体看下列表达式：</p>
+<script type="math/tex; mode=display">\left(\begin{array}{c}
+F_n \\ 
+F_{n-1}
+\end{array}\right)=\left(\begin{array}{c}
+F_{n-1}+F_{n-2} \\ 
+F_{n-1}
+\end{array}\right)=\left(\begin{array}{c}
+1*F_{n-1}+1*F_{n-2} \\ 
+1*F_{n-1}+0*F_{n-2}
+\end{array}\right)=\left(\begin{array}{cc}
+    1 & 1 \\ 
+    1 & 0
+\end{array}\right)*\left(\begin{array}{c}
+    F_{n-1} \\ 
+    F_{n-2}
+\end{array}\right)\\
+=\left(\begin{array}{cc}
+    1 & 1 \\ 
+    1 & 0
+\end{array}\right)^2*\left(\begin{array}{c}
+    F_{n-2} \\ 
+    F_{n-3}
+\end{array}\right)......=\left(\begin{array}{cc}
+    1 & 1 \\ 
+    1 & 0
+\end{array}\right)^{n-2}*\left(\begin{array}{c}
+    F_2 \\ 
+    F_1
+\end{array}\right)</script><p>&#8195;&#8195;看着上述表达式，有什么感想？耳边曾经经常响起的大学课程无用论是否还在回荡？事实证明，学校的课程还是相当有用的啊，不懂矩阵的回去查查大学线性代数，😄 。回过头来再说斐波那契问题，上述表达式把数列问题就转换成了，计算一个2*2矩阵的n-2次幂的问题,幂运算就可以用二分法运算降低时间复杂度了，简单说一下大概思路，就比如算2的32次幂，最简单办法肯定是循环31次，用2挨个乘；二分法的意思就是2的32次幂 可以转换为 2的16次幂乘以2的16次幂，2的16次幂 还可以转换为 2的8次幂乘以2的8次幂，……，以此类推，大概循环5次即可算出最后结果。思路大概就是这么个思路，网上代码是用python实现的，python里有成熟的计算矩阵的函数，我自己用java实现了一下，具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fib</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"YYYY/MM/dd HH:mm:ss.SSS"</span>);</span><br><span class="line"></span><br><span class="line">		System.out.println(sdf.format(<span class="keyword">new</span> Date()));</span><br><span class="line">		System.out.println(Fib3(<span class="number">48</span>));</span><br><span class="line">		System.out.println(sdf.format(<span class="keyword">new</span> Date()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Fib3</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][<span class="number">2</span>];<span class="comment">//用二维数组模拟2*2矩阵</span></span><br><span class="line">			a[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">			a[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">			a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">			a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span>[][] temp = matricPow(a, n - <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> temp[<span class="number">0</span>][<span class="number">0</span>] + temp[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//矩阵相乘计算 目前只支持2*2矩阵相乘</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[][] matricMulity(<span class="keyword">int</span>[][] a, <span class="keyword">int</span>[][] b) &#123;</span><br><span class="line">		<span class="keyword">int</span>[][] result = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">		result[<span class="number">0</span>][<span class="number">0</span>] = a[<span class="number">0</span>][<span class="number">0</span>] * b[<span class="number">0</span>][<span class="number">0</span>] + a[<span class="number">0</span>][<span class="number">1</span>] * b[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">		result[<span class="number">0</span>][<span class="number">1</span>] = a[<span class="number">0</span>][<span class="number">0</span>] * b[<span class="number">0</span>][<span class="number">1</span>] + a[<span class="number">0</span>][<span class="number">1</span>] * b[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">		result[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">1</span>][<span class="number">0</span>] * b[<span class="number">0</span>][<span class="number">0</span>] + a[<span class="number">1</span>][<span class="number">1</span>] * b[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">		result[<span class="number">1</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">0</span>] * b[<span class="number">0</span>][<span class="number">1</span>] + a[<span class="number">1</span>][<span class="number">1</span>] * b[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//2*2矩阵幂运算</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[][] matricPow(<span class="keyword">int</span>[][] a, <span class="keyword">int</span> n) &#123;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[][] &#123; &#123; <span class="number">1</span>, <span class="number">1</span> &#125;, &#123; <span class="number">1</span>, <span class="number">0</span> &#125; &#125;;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> a;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (n % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> matricPow(matricMulity(a, a), n / <span class="number">2</span>);</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> matricMulity(matricPow(matricMulity(a, a), (n - <span class="number">1</span>) / <span class="number">2</span>), a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#8195;&#8195;n比较小的时候，方法二和方法三计算时间差不多，n特别大才能看出些效果，当n=1,000,000时，方法一就不考虑了，今年应该算不出来。方法二和方法三，计算时间如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2018</span>/<span class="number">12</span>/<span class="number">20</span> <span class="number">22</span>:<span class="number">38</span>:<span class="number">11.811</span></span><br><span class="line"><span class="number">1884755131</span></span><br><span class="line"><span class="number">2018</span>/<span class="number">12</span>/<span class="number">20</span> <span class="number">22</span>:<span class="number">38</span>:<span class="number">11.821</span></span><br><span class="line"></span><br><span class="line"><span class="number">2018</span>/<span class="number">12</span>/<span class="number">20</span> <span class="number">22</span>:<span class="number">38</span>:<span class="number">13.822</span></span><br><span class="line"><span class="number">1884755131</span></span><br><span class="line"><span class="number">2018</span>/<span class="number">12</span>/<span class="number">20</span> <span class="number">22</span>:<span class="number">38</span>:<span class="number">13.823</span></span><br></pre></td></tr></table></figure>
+<p>&#8195;&#8195;两种方法计算第100万位基本还在毫秒级别，一般情况可能第二种方法就够用了，但是你不研究第三种方法，是体会不到第三种方法的乐趣的，呵呵~~~</p>
+<p><font face="新宋体" color="“#aaaaaa”">备注：本文章中所有公式都是用markdown代码编写，不是图片，不是word。第一次用markdown，基本也是第一次用java写程序，生命在于折腾嘛。后续我再研究研究将github的博客打开评论，希望各位来拍砖。</font></p>
+
+          
         
       
     </div>
@@ -465,17 +465,6 @@
 
           
           
-             <span id="/2018/12/19/新的起点/" class="leancloud_visitors" data-flag-title="新的起点">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
 
           
 
@@ -498,17 +487,10 @@
       
         
           
-          新公司入职正好一个月，记录一下。
-从今天开始定期写博客，方方面面的，刚开始用markdown和github写博客，不太习惯，慢慢习惯。
+            <p>新公司入职正好一个月，记录一下。</p>
+<p>从今天开始定期写博客，方方面面的，刚开始用markdown和github写博客，不太习惯，慢慢习惯。</p>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/19/新的起点/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -612,16 +594,6 @@
           
 
           
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/wangpengda" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-            </div>
-          
 
           
           
@@ -666,32 +638,12 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
 
         
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人数
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
-
 
 
 
@@ -786,13 +738,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
   
 
   
@@ -846,7 +791,7 @@
         el: '#comments' ,
         verify: false,
         notify: false,
-        appId: 'ogoWyU1sD0cdHfXJy54Fegwi-gzGzoHsz',
+        appId: 'ogoWyU1sD0cdHfXJy54Fegwi-gzGzoHsz# your leancloud application appid',
         appKey: 'CyjtaekbFK3dTpHMsz5nwCGs',
         placeholder: 'Just go go',
         avatar:'mm',
@@ -864,113 +809,6 @@
 
 
   
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("ogoWyU1sD0cdHfXJy54Fegwi-gzGzoHsz#你的app_id", "CyjtaekbFK3dTpHMsz5nwCGs#你的的app_key");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
 
   
 
