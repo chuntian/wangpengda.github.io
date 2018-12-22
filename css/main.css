@@ -1089,9 +1089,6 @@ pre .javascript .function {
 .back-to-top.back-to-top-on {
   bottom: 30px;
 }
-.header {
-  background: transparent;
-}
 .header-inner {
   position: relative;
 }
@@ -1102,6 +1099,8 @@ pre .javascript .function {
 .site-meta {
   margin: 0;
   text-align: center;
+  background: url("../images/bgheader.jpg") center bottom no-repeat;
+  background-size: contain;
 }
 @media (max-width: 767px) {
   .site-meta {
@@ -1933,7 +1932,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff81ff;
+  background: #6ed1c9;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2862,9 +2861,9 @@ pre .javascript .function {
   position: relative;
 }
 .site-meta {
-  padding: 20px 0;
+  padding: 30px 0 100px;
   color: #fff;
-  background: #222;
+/*background: $black-deep;*/
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
