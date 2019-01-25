@@ -26,6 +26,13 @@ const ap = new APlayer({
         artist: '半阳',
         url: 'http://www.ytmp3.cn/down/57306.mp3',
         cover: 'http://img.ytmp3.cn/image/89.jpg',
+      },
+      {
+        name: '无味',
+        artist: '郑胖',
+        url: 'http://www.ytmp3.cn/down/52573.mp3',
+        cover: 'http://img.ytmp3.cn/image/89.jpg',
       }
+      
     ]
 });
