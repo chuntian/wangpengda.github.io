@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>线性规划-2-单纯性解法</title>
+    <url>/2020/03/27/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92-2-%E5%8D%95%E7%BA%AF%E6%80%A7%E8%A7%A3%E6%B3%95/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>自我升华</category>
+      </categories>
+      <tags>
+        <tag>运筹学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>线性规划-1-数学模型</title>
     <url>/2019/07/10/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92-1-%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p>&#8195;&#8195;还记得大学的时候，学习过《运筹学》这门课，当时没什么感觉，乃至毕业工作之后的几年，没怎么用到，也慢慢淡忘了。感叹曾经的年少无知，随着工作时间的积累，越发觉得数学建模、运筹学、离散数学、统计学等等这些课程的重要性，仅仅会写if else，会用几个框架，我觉得是远远不够的。所以，业余抽点时间，在研究一下运筹学，不知道还能不能看得懂了。</p>
