@@ -7,7 +7,7 @@ const ap = new APlayer({
         name: '心雨',
         artist: '杨钰莹',
         url: 'http://music.163.com/song/media/outer/url?id=317151.mp3',
-        cover: 'http://img.ytmp3.cn/image/55.jpg',
+        cover: 'http://p2.music.126.net/cLeT6ZtpFKYnBHiCONTJgQ==/18648816720717022.jpg',
       }
     ]
 });
