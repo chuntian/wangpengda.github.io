@@ -91,18 +91,18 @@
 
 
 
-<meta name="description" content="&amp;#8195;&amp;#8195;系列1初步认识了线性规划的数学模型，这就和我们小学初中的时候解应用题一样，假设未知数，列方程，求解；那么类似于配料问题，我们建立了线性规划的数学模型，那么怎么求解呢？怎么算得到最优解呢？&amp;#8195;&amp;#8195;这一讲主要讲述线性规划入门经典解法，单纯性法。当然，线性规划再解之前，要先整理标准形式，还有一些专业术语，如可行解、基本解等等，这里不再详细阐述，不理解的可以">
+<meta name="description" content="&amp;#8195;&amp;#8195;这一篇紧接上一篇单纯形解法，如果看过上一篇的博客的，可能会诧异了，怎么上一篇感觉没写完就戛然而止了呢？额。。。很惭愧，本想随便举个例子，然后用基本单纯形法求解一下，熟悉一下求解过程，结果发现，随便举的例子有点特殊了，加了松弛变量（这种情况也称剩余变量）发现一下找不到基变量。哎，所以这几天又继续学习了下边的运筹学课程，这就要介绍一下基于基本单纯形法演化出来的M法和两阶段法">
 <meta name="keywords" content="运筹学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性规划-2-单纯形解法">
-<meta property="og:url" content="http://wangpengda.github.io/2020/03/27/线性规划-2-单纯性解法/index.html">
+<meta property="og:title" content="线性规划-2-单纯形解法2">
+<meta property="og:url" content="http://wangpengda.github.io/2020/04/07/线性规划-2-单纯性解法2/index.html">
 <meta property="og:site_name" content="Panda的blog">
-<meta property="og:description" content="&amp;#8195;&amp;#8195;系列1初步认识了线性规划的数学模型，这就和我们小学初中的时候解应用题一样，假设未知数，列方程，求解；那么类似于配料问题，我们建立了线性规划的数学模型，那么怎么求解呢？怎么算得到最优解呢？&amp;#8195;&amp;#8195;这一讲主要讲述线性规划入门经典解法，单纯性法。当然，线性规划再解之前，要先整理标准形式，还有一些专业术语，如可行解、基本解等等，这里不再详细阐述，不理解的可以">
+<meta property="og:description" content="&amp;#8195;&amp;#8195;这一篇紧接上一篇单纯形解法，如果看过上一篇的博客的，可能会诧异了，怎么上一篇感觉没写完就戛然而止了呢？额。。。很惭愧，本想随便举个例子，然后用基本单纯形法求解一下，熟悉一下求解过程，结果发现，随便举的例子有点特殊了，加了松弛变量（这种情况也称剩余变量）发现一下找不到基变量。哎，所以这几天又继续学习了下边的运筹学课程，这就要介绍一下基于基本单纯形法演化出来的M法和两阶段法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-30T07:09:31.193Z">
+<meta property="og:updated_time" content="2020-04-08T09:29:58.800Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线性规划-2-单纯形解法">
-<meta name="twitter:description" content="&amp;#8195;&amp;#8195;系列1初步认识了线性规划的数学模型，这就和我们小学初中的时候解应用题一样，假设未知数，列方程，求解；那么类似于配料问题，我们建立了线性规划的数学模型，那么怎么求解呢？怎么算得到最优解呢？&amp;#8195;&amp;#8195;这一讲主要讲述线性规划入门经典解法，单纯性法。当然，线性规划再解之前，要先整理标准形式，还有一些专业术语，如可行解、基本解等等，这里不再详细阐述，不理解的可以">
+<meta name="twitter:title" content="线性规划-2-单纯形解法2">
+<meta name="twitter:description" content="&amp;#8195;&amp;#8195;这一篇紧接上一篇单纯形解法，如果看过上一篇的博客的，可能会诧异了，怎么上一篇感觉没写完就戛然而止了呢？额。。。很惭愧，本想随便举个例子，然后用基本单纯形法求解一下，熟悉一下求解过程，结果发现，随便举的例子有点特殊了，加了松弛变量（这种情况也称剩余变量）发现一下找不到基变量。哎，所以这几天又继续学习了下边的运筹学课程，这就要介绍一下基于基本单纯形法演化出来的M法和两阶段法">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://wangpengda.github.io/2020/03/27/线性规划-2-单纯性解法/">
+  <link rel="canonical" href="http://wangpengda.github.io/2020/04/07/线性规划-2-单纯性解法2/">
 
 
 
 
 
-  <title>线性规划-2-单纯形解法 | Panda的blog</title>
+  <title>线性规划-2-单纯形解法2 | Panda的blog</title>
   
 
 
@@ -330,7 +330,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wangpengda.github.io/2020/03/27/线性规划-2-单纯性解法/">
+    <link itemprop="mainEntityOfPage" href="http://wangpengda.github.io/2020/04/07/线性规划-2-单纯性解法2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Panda Wang">
@@ -347,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线性规划-2-单纯形解法</h1>
+          <h1 class="post-title" itemprop="name headline">线性规划-2-单纯形解法2</h1>
         
 
         <div class="post-meta">
@@ -359,8 +359,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T17:44:16+08:00">
-                2020-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T16:45:27+08:00">
+                2020-04-07
               </time>
             
 
@@ -400,8 +400,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/03/27/线性规划-2-单纯性解法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/27/线性规划-2-单纯性解法/" itemprop="commentCount"></span>
+                <a href="/2020/04/07/线性规划-2-单纯性解法2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/07/线性规划-2-单纯性解法2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,7 +409,7 @@
 
           
           
-             <span id="/2020/03/27/线性规划-2-单纯性解法/" class="leancloud_visitors" data-flag-title="线性规划-2-单纯形解法">
+             <span id="/2020/04/07/线性规划-2-单纯性解法2/" class="leancloud_visitors" data-flag-title="线性规划-2-单纯形解法2">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -440,14 +440,8 @@
       
 
       
-        <p>&#8195;&#8195;系列1初步认识了线性规划的数学模型，这就和我们小学初中的时候解应用题一样，假设未知数，列方程，求解；那么类似于配料问题，我们建立了线性规划的数学模型，那么怎么求解呢？怎么算得到最优解呢？<br>&#8195;&#8195;这一讲主要讲述线性规划入门经典解法，单纯性法。当然，线性规划再解之前，要先整理标准形式，还有一些专业术语，如可行解、基本解等等，这里不再详细阐述，不理解的可以先去随便找本线性规划的书，翻翻前几页就ok。本章主要针对上一章的例题，用单纯行法列出具体的求解过程：<br>&#8195;&#8195;用单纯行法求解线性规划，分为几步，具体如下：<br>&#8195;&#8195;&#8195;&#8195;<strong><em>1</em></strong>. 将线性规划问题化成标准型 <strong>(引入松弛变量或剩余变量)</strong><br>&#8195;&#8195;&#8195;&#8195;<strong><em>2</em></strong>. 找出或构造一个<strong>m阶单位矩阵</strong>（假设标准型限行规划问题是m<em>n阶矩阵）作为<strong>初始可行基</strong>，建立<strong>初始单纯形表</strong><br>&#8195;&#8195;&#8195;&#8195;**</em>3<strong>*. 计算各</strong>非基变量的检验数<strong>σj=cj−Εzj 若</strong>所有检验数≤0<strong>，则问题已得到</strong>最优解，停止计算<strong>。否则，转入下一步。(检验数)<br>&#8195;&#8195;&#8195;&#8195;*</strong>4<strong><em>. 在大于0的检验数中，若某个检验数对应的系数列向量≤ 0，则此问题是无界解，停止计算，否则转入下步。<br>&#8195;&#8195;&#8195;&#8195;</em></strong>5<strong>*. 根据max（检验数j | 检验数j&gt;0）=检验数k的原则，确定</strong>为换入变量(进基变量) 再按最小比值法则(biaik，&amp;aik&gt;0)确定换出变量<strong>，建立新的单纯形表，此时的基变量中xk代替的换出变量的位置。<br>&#8195;&#8195;&#8195;&#8195;*</strong>6<em>*</em>. 以aik为主元素进行迭代，把xk所对应的列向量变为单位列向量，即aik变为1 同列中其他元素变为0，继续计算各非基变量的检验数，进行第三步。</p>
-<p>&#8195;&#8195;好，根据以上6步，解一下上一章的线性规划问题，首先先引入松弛变量，化成标准型，如下：</p>
-<p>&#8195;&#8195;&#8195;&#8195;目标函数转换成求max</p>
-<script type="math/tex; mode=display">Max \ \ \ \ -2*X_1 - 7*X_2 - 4*X_3</script><p>&#8195;&#8195;&#8195;&#8195;通过引入松弛变量，同时为了方便的找出初始可行解，转换成</p>
-<script type="math/tex; mode=display">s.t. \ \ \ \ 0.3*X_1 + 2*X_2 + 1*X_3 - X_4 = 70\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.1*X_1 + 0.05*X_2 + 0.02*X_3 - X_5 = 3\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.05*X_1 + 0.1*X_2 + 0.02*X_3 - X_6 = 3\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X_1\geq0,X_2\geq0,X_3\geq0,X_4\geq0,X_5\geq0,X_6\geq0</script>
+        <p>&#8195;&#8195;这一篇紧接上一篇单纯形解法，如果看过上一篇的博客的，可能会诧异了，怎么上一篇感觉没写完就戛然而止了呢？额。。。很惭愧，本想随便举个例子，然后用基本单纯形法求解一下，熟悉一下求解过程，结果发现，随便举的例子有点特殊了，加了松弛变量（这种情况也称剩余变量）发现一下找不到基变量。哎，所以这几天又继续学习了下边的运筹学课程，这就要介绍一下基于基本单纯形法演化出来的M法和两阶段法。<br>&#8195;&#8195;</p>
+
       
     </div>
     
@@ -507,7 +501,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://wangpengda.github.io/2020/03/27/线性规划-2-单纯性解法/" title="线性规划-2-单纯形解法">http://wangpengda.github.io/2020/03/27/线性规划-2-单纯性解法/</a>
+    <a href="http://wangpengda.github.io/2020/04/07/线性规划-2-单纯性解法2/" title="线性规划-2-单纯形解法2">http://wangpengda.github.io/2020/04/07/线性规划-2-单纯性解法2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -535,8 +529,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/10/线性规划-1-数学模型/" rel="next" title="线性规划-1-数学模型">
-                <i class="fa fa-chevron-left"></i> 线性规划-1-数学模型
+              <a href="/2020/03/27/线性规划-2-单纯性解法/" rel="next" title="线性规划-2-单纯形解法">
+                <i class="fa fa-chevron-left"></i> 线性规划-2-单纯形解法
               </a>
             
           </div>
@@ -544,10 +538,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/07/线性规划-2-单纯性解法2/" rel="prev" title="线性规划-2-单纯形解法2">
-                线性规划-2-单纯形解法2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
